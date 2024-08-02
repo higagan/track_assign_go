@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visitor Report</title>
+    <script>
+        async function fetchVisitorData() {
+            const response = await fetch('http://localhost:8080/query');
+            const data = await response.json();
+            const table = document.getElementById('visitorTable');
+
+            data.forEach(item => {
+                const row = table.insertRow();
+                const urlCell = row.insertCell(0);
+                const visitorCell = row.insertCell(1);
+                urlCell.innerHTML = item.url;
+                visitorCell.innerHTML = item.visitors;
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchVisitorData);
+    </script>
+</head>
+<body>
+    <h1>Visitor Report</h1>
+    <table border="1" id="visitorTable">
+        <tr>
+            <th>URL</th>
+            <th>Unique Visitors</th>
+        </tr>
+    </table>
+</body>
+</html>
